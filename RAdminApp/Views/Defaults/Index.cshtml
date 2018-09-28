@@ -1,0 +1,37 @@
+﻿@{
+    ViewBag.Title = "Defaults";
+}
+@{
+    ViewBag.errmessage = "T_DEFAULTS";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<RAdminApp.Models.DefaultsModel>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.Id).Width("100px");
+            columns.Bound(p => p.Inactive);
+            columns.Bound(p => p.Value);
+            columns.Bound(p => p.FieldName);
+            columns.Bound(p => p.ParentTable);
+
+        })
+        .Pageable()
+        .Sortable()
+        .Scrollable()
+        .Filterable()
+        .HtmlAttributes(new { style = "height:900px;" })
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(50)
+        .Read(read => read.Action("DefaultsRead", "Defaults"))
+        )
+            )
+        </div>
+    </div>
+
+    
+</div>

@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Performances";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<RAdminApp.Models.PerformancesModel>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.Id).Width("100px");
+            columns.Bound(p => p.FacilityId).Width("100px");
+            columns.Bound(p => p.Description);
+            columns.Bound(p => p.PerformanceDateTime).Format("{0:yyyy/MM/dd hh:mm}");
+        })
+        .Pageable()
+        .Sortable()
+        .Scrollable()
+        .Filterable()
+        .HtmlAttributes(new { style = "height:900px;" })
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(50)
+        .Read(read => read.Action("PerformancesRead", "Performances"))
+        )
+            )
+        </div>
+    </div>
+
+    
+</div>

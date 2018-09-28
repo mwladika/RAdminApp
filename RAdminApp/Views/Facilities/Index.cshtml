@@ -1,0 +1,33 @@
+﻿@{
+    ViewBag.Title = "Facilities";
+}
+@{
+    ViewBag.errmessage = "From facility manager.";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<RAdminApp.Models.FacilitiesModel>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.Id).Width("100px");
+            columns.Bound(p => p.Description);
+        })
+        .Pageable()
+        .Sortable()
+        .Scrollable()
+        .Filterable()
+        .HtmlAttributes(new { style = "height:900px;" })
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(50)
+        .Read(read => read.Action("FacilitiesRead", "Facilities"))
+        )
+            )
+        </div>
+    </div>
+
+    
+</div>

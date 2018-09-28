@@ -1,0 +1,32 @@
+﻿@{
+    ViewBag.Title = "Price Types";
+}
+
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-xs-18 col-md-12">
+            @(Html.Kendo().Grid<RAdminApp.Models.PriceTypesModel>()
+        .Name("grid")
+        .Columns(columns =>
+        {
+            columns.Bound(p => p.Id).Width("100px");
+            columns.Bound(p => p.Description);
+            columns.Bound(p => p.ShortDescription);
+        })
+        .Pageable()
+        .Sortable()
+        .Scrollable()
+        .Filterable()
+        .HtmlAttributes(new { style = "height:900px;" })
+        .DataSource(dataSource => dataSource
+        .Ajax()
+        .PageSize(50)
+        .Read(read => read.Action("PriceTypesRead", "PriceTypes"))
+        )
+            )
+        </div>
+    </div>
+
+    
+</div>

@@ -1,0 +1,112 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <title>@ViewBag.Title</title>
+    <link href="@Url.Content("~/Content/bootstrap.min.css")" rel="stylesheet" type="text/css" />
+    <link href="@Url.Content("~/Content/Site.css")" rel="stylesheet" type="text/css" />
+
+    <link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.common.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.mobile.all.min.css" rel="stylesheet" type="text/css" />
+    <link href="https://kendo.cdn.telerik.com/2018.2.620/styles/kendo.highcontrast.min.css" rel="stylesheet" type="text/css" />
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/jquery.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/jszip.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.all.min.js"></script>
+    <script src="https://kendo.cdn.telerik.com/2018.2.620/js/kendo.aspnetmvc.min.js"></script>
+    <script src="@Url.Content("~/Scripts/kendo.modernizr.custom.js")"></script>
+</head>
+<body>
+
+    <div class="container-fluid">
+        <div class="row k-header">
+            <div id="responsive-panel">
+                @(Html.Kendo().Menu()
+                      .Name("Menu")
+                      .Items(items =>
+                      {
+                          items.Add().Text("Home").Items(children =>
+                          {
+                              children.Add().Text("TLIVE").Url("/Home?ti=0");
+                              children.Add().Text("TWEB").Url("/Home?ti=1");
+                              children.Add().Text("TTEST").Url("/Home?ti=2");
+                          }).Url("/Home");
+                          items.Add().Text("").HtmlAttributes("cssClass:k-separator");
+                          items.Add().Text("ProdElements").Items(children =>
+                          {
+                              children.Add().Text("Titles").Url("/Titles");
+                              children.Add().Text("Seasons").Url("/Seasons");
+                              children.Add().Text("Productions").Url("/Productions");
+                              children.Add().Text("ProductionSeasons").Url("/ProductionSeasons");
+                              children.Add().Text("Performances").Url("/Performances");
+                              children.Add().Text("Packages").Url("/Packages");
+                          });
+                          items.Add().Text("MOS").Url("/MOS");
+                          items.Add().Text("Constitunecies").Url("/Constitunecies");
+                          items.Add().Text("PriceTypes").Url("/PriceTypes");
+                          items.Add().Text("Theaters").Url("/Theaters");
+                          items.Add().Text("Facilities").Url("/Facilities");
+                          items.Add().Text("Defaults").Url("/Defaults");
+                          items.Add().Text("Keywords").Url("/Keywords");
+                          items.Add().Text("Zones").Url("/Zones");
+                          items.Add().Text("Sys Tables").Url("/SystemTables");
+                      })
+                )
+            </div>
+            <button id="configure" class="k-rpanel-toggle k-button k-primary btn-toggle"><span class="k-icon k-i-hbars k-i-menu"></span></button>
+        </div>
+    </div>
+    
+    <div class="container-fluid placeholders">
+        <div class="row">
+            <div class="col-xs-4 col-md-2 placeholder">
+                <img class="img-responsive " alt="100x100" src="~/Images/BurstBlack.jpg" />
+            </div>
+            <div class="col-xs-10 col-md-3">
+                <h3>RAdmin</h3>
+                <h4>Tessitura Instance: @Session["TessInstance"].ToString()</h4>
+                <div>
+                    @Session["TessPath"].ToString()
+                </div>
+            </div>
+
+            <div class="col-xs-10 col-md-3">
+              @ViewBag.errmessage
+
+            </div>
+            <div class="col-xs-10 col-md-3">
+                <h2>@ViewBag.Title</h2>
+
+            </div>
+        </div>
+    </div>
+
+    @RenderBody()
+
+
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-xs-18 col-md-12">
+            </div>
+        </div>
+    </div>
+
+    <footer class="footer">
+        <div class="container-fluid">
+            <p class="text-muted"> @DateTime.Now </p>
+        </div>
+    </footer>
+
+    <script>
+        $(document).ready(function () {
+            $("#responsive-panel").kendoResponsivePanel({
+                breakpoint: 768,
+                autoClose: false,
+                orientation: "top"
+            });
+        });
+        function onclick(e) {
+            $("#responsive-panel").getKendoResponsivePanel().toggle();
+        }
+
+    </script>
+</body>
+</html>
